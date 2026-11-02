@@ -1,0 +1,23 @@
+{
+  "hab_009d1bb6": {
+    "habit_id": "hab_009d1bb6",
+    "user_id": "usr_aryan",
+    "name": "morning jog",
+    "category": "Health",
+    "type": "numeric",
+    "target_value": 8.0,
+    "unit": "",
+    "operator": ">=",
+    "is_public": true,
+    "created_at": "2026-11-02T19:52:52.978587"
+  },
+  "hab_d39a073b": {
+    "habit_id": "hab_d39a073b",
+    "user_id": "usr_aryan",
+    "name": "wakeup morning",
+    "category": "Health",
+    "type": "binary",
+    "is_public": true,
+    "created_at": "2026-11-02T19:53:41.488775"
+  }
+}

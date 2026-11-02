@@ -1,0 +1,260 @@
+{
+  "usr_aryan": {
+    "following": [
+      "usr_rahul",
+      "usr_sneha",
+      "usr_priya",
+      "usr_rohan",
+      "usr_ananya",
+      "usr_vikram",
+      "usr_divya",
+      "usr_shreya",
+      "usr_amit",
+      "usr_pooja"
+    ],
+    "followers": [
+      "usr_rahul",
+      "usr_sneha",
+      "usr_priya",
+      "usr_rohan",
+      "usr_ananya",
+      "usr_vikram",
+      "usr_divya",
+      "usr_shreya"
+    ],
+    "pending_incoming": [
+      "usr_aditya"
+    ]
+  },
+  "usr_rahul": {
+    "following": [
+      "usr_aditya",
+      "usr_sneha",
+      "usr_aryan",
+      "usr_rohan"
+    ],
+    "followers": [
+      "usr_aryan",
+      "usr_sneha",
+      "usr_amit",
+      "usr_vikram",
+      "usr_pooja",
+      "usr_karthik"
+    ],
+    "pending_incoming": []
+  },
+  "usr_sneha": {
+    "following": [
+      "usr_pooja",
+      "usr_neha",
+      "usr_rohan",
+      "usr_aryan"
+    ],
+    "followers": [
+      "usr_rahul",
+      "usr_priya",
+      "usr_rohan",
+      "usr_vikram",
+      "usr_aditya",
+      "usr_divya",
+      "usr_shreya"
+    ],
+    "pending_incoming": []
+  },
+  "usr_amit": {
+    "following": [
+      "usr_vikram",
+      "usr_rahul",
+      "usr_karthik",
+      "usr_rohan"
+    ],
+    "followers": [
+      "usr_ananya",
+      "usr_vikram",
+      "usr_pooja",
+      "usr_karthik",
+      "usr_neha",
+      "usr_aditya",
+      "usr_divya"
+    ],
+    "pending_incoming": []
+  },
+  "usr_priya": {
+    "following": [
+      "usr_ananya",
+      "usr_shreya",
+      "usr_amit",
+      "usr_aditya",
+      "usr_aryan"
+    ],
+    "followers": [
+      "usr_aryan",
+      "usr_rohan",
+      "usr_vikram"
+    ],
+    "pending_incoming": []
+  },
+  "usr_rohan": {
+    "following": [
+      "usr_amit",
+      "usr_aryan",
+      "usr_ananya",
+      "usr_vikram"
+    ],
+    "followers": [
+      "usr_aryan",
+      "usr_rahul",
+      "usr_neha",
+      "usr_aditya",
+      "usr_varun"
+    ],
+    "pending_incoming": []
+  },
+  "usr_ananya": {
+    "following": [
+      "usr_neha",
+      "usr_vikram",
+      "usr_rohan",
+      "usr_amit",
+      "usr_aryan"
+    ],
+    "followers": [
+      "usr_rahul",
+      "usr_rohan",
+      "usr_vikram",
+      "usr_varun"
+    ],
+    "pending_incoming": []
+  },
+  "usr_vikram": {
+    "following": [
+      "usr_aryan",
+      "usr_aditya",
+      "usr_divya",
+      "usr_rahul"
+    ],
+    "followers": [
+      "usr_sneha",
+      "usr_priya",
+      "usr_neha",
+      "usr_divya"
+    ],
+    "pending_incoming": []
+  },
+  "usr_pooja": {
+    "following": [
+      "usr_priya",
+      "usr_aditya",
+      "usr_karthik",
+      "usr_neha"
+    ],
+    "followers": [
+      "usr_aryan",
+      "usr_sneha",
+      "usr_karthik",
+      "usr_varun",
+      "usr_shreya"
+    ],
+    "pending_incoming": []
+  },
+  "usr_karthik": {
+    "following": [
+      "usr_neha",
+      "usr_rahul",
+      "usr_varun",
+      "usr_vikram"
+    ],
+    "followers": [
+      "usr_amit",
+      "usr_ananya"
+    ],
+    "pending_incoming": []
+  },
+  "usr_neha": {
+    "following": [
+      "usr_ananya",
+      "usr_aditya",
+      "usr_varun",
+      "usr_rohan"
+    ],
+    "followers": [
+      "usr_sneha",
+      "usr_amit",
+      "usr_ananya",
+      "usr_vikram",
+      "usr_pooja",
+      "usr_aditya",
+      "usr_shreya"
+    ],
+    "pending_incoming": []
+  },
+  "usr_aditya": {
+    "following": [
+      "usr_amit",
+      "usr_priya",
+      "usr_neha",
+      "usr_vikram"
+    ],
+    "followers": [
+      "usr_aryan",
+      "usr_rahul",
+      "usr_vikram",
+      "usr_pooja"
+    ],
+    "pending_incoming": []
+  },
+  "usr_divya": {
+    "following": [
+      "usr_neha",
+      "usr_rahul",
+      "usr_aryan",
+      "usr_ananya"
+    ],
+    "followers": [
+      "usr_sneha",
+      "usr_amit",
+      "usr_rohan",
+      "usr_ananya",
+      "usr_karthik",
+      "usr_varun"
+    ],
+    "pending_incoming": []
+  },
+  "usr_varun": {
+    "following": [
+      "usr_pooja",
+      "usr_aryan",
+      "usr_rahul",
+      "usr_amit"
+    ],
+    "followers": [
+      "usr_aryan",
+      "usr_sneha",
+      "usr_priya",
+      "usr_vikram"
+    ],
+    "pending_incoming": []
+  },
+  "usr_shreya": {
+    "following": [
+      "usr_aditya",
+      "usr_vikram",
+      "usr_sneha",
+      "usr_amit",
+      "usr_aryan"
+    ],
+    "followers": [
+      "usr_aryan",
+      "usr_rohan",
+      "usr_karthik",
+      "usr_aditya",
+      "usr_divya"
+    ],
+    "pending_incoming": []
+  },
+  "usr_5d35b9f5df05": {
+    "following": [],
+    "followers": [],
+    "pending_incoming": []
+  }
+}

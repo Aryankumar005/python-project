@@ -1,0 +1,17 @@
+{
+  "duel_01": {
+    "challenge_id": "duel_01",
+    "challenger_id": "usr_rahul",
+    "challenger_name": "Rahul Sharma",
+    "opponent_id": "usr_aryan",
+    "opponent_name": "Aryan Kumar",
+    "habit_name": "Python Study Session",
+    "duration_days": 7,
+    "start_date": "2026-10-30",
+    "end_date": "2026-11-06",
+    "status": "active",
+    "challenger_score": 16,
+    "opponent_score": 18,
+    "winner_id": null
+  }
+}

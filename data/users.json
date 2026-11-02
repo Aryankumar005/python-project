@@ -1,0 +1,211 @@
+{
+  "usr_aryan": {
+    "user_id": "usr_aryan",
+    "email": "cs25b1008@iiitr.ac.in",
+    "password_hash": "50b53d73fd2f62b0f55285da6ad214dffb74196f6d8511ab9ca09dad34084fd7",
+    "salt": "51ad62631329c2ee4ce90f48c9a72fd8",
+    "display_name": "Aryan Kumar",
+    "avatar": "🚀",
+    "all_time_points": 580,
+    "badges": [
+      "Early Adopter",
+      "Python Pioneer",
+      "7-Day Streak Master"
+    ],
+    "created_at": "2026-11-02T22:53:44.875558"
+  },
+  "usr_rahul": {
+    "user_id": "usr_rahul",
+    "email": "rahul.s@iiitr.ac.in",
+    "password_hash": "1befbe3e4d8bccd463ad49982d9dd39bf57844f751619470d9611df397811733",
+    "salt": "38f74a5797d666b20bd76fbd6250d24f",
+    "display_name": "Rahul Sharma",
+    "avatar": "⚡",
+    "all_time_points": 620,
+    "badges": [
+      "Consistent Achiever",
+      "Early Bird"
+    ],
+    "created_at": "2026-11-02T22:53:44.879047"
+  },
+  "usr_sneha": {
+    "user_id": "usr_sneha",
+    "email": "sneha.k@iiitr.ac.in",
+    "password_hash": "6a0e9443aca8410c73b1798541aa4caaa569c5a5fcfa2f553d0c3dd0f351cf28",
+    "salt": "47c9b9cf1c01c50954f091e7565cd61d",
+    "display_name": "Sneha Kapoor",
+    "avatar": "🌟",
+    "all_time_points": 540,
+    "badges": [
+      "Study Marathoner"
+    ],
+    "created_at": "2026-11-02T22:53:44.881851"
+  },
+  "usr_amit": {
+    "user_id": "usr_amit",
+    "email": "amit.p@iiitr.ac.in",
+    "password_hash": "4098907620ffca81bf22ca7279ef054a06a3d7dcc556ae363189a68296297e56",
+    "salt": "b1b58bb220b5378a298660e63c7b8811",
+    "display_name": "Amit Patel",
+    "avatar": "🎯",
+    "all_time_points": 410,
+    "badges": [
+      "Fitness Freak"
+    ],
+    "created_at": "2026-11-02T22:53:44.885381"
+  },
+  "usr_priya": {
+    "user_id": "usr_priya",
+    "email": "priya.v@iiitr.ac.in",
+    "password_hash": "dcb7ff76e6c6f32b3ab0af691bdd0951469487aecaa3890ee0724b4d4df3742d",
+    "salt": "be74c13d17fcc6add5be0751f4e3fcc6",
+    "display_name": "Priya Verma",
+    "avatar": "🔥",
+    "all_time_points": 490,
+    "badges": [
+      "Duel Champion"
+    ],
+    "created_at": "2026-11-02T22:53:44.888408"
+  },
+  "usr_rohan": {
+    "user_id": "usr_rohan",
+    "email": "rohan.g@iiitr.ac.in",
+    "password_hash": "8886cf14fbdef7e769f2efc1210ce845e2ea6b71cbaf1eeec9af730a9de4017a",
+    "salt": "196188217ef47ed57ec694d5616db1b1",
+    "display_name": "Rohan Gupta",
+    "avatar": "💻",
+    "all_time_points": 460,
+    "badges": [
+      "Code Monk"
+    ],
+    "created_at": "2026-11-02T22:53:44.891468"
+  },
+  "usr_ananya": {
+    "user_id": "usr_ananya",
+    "email": "ananya.i@iiitr.ac.in",
+    "password_hash": "aaa71fe24fdf1d25d58d80fd95703417ab6e1399489d67595264a7894260245a",
+    "salt": "8ea38c3be214b91d1d11a0fe22289256",
+    "display_name": "Ananya Iyer",
+    "avatar": "📚",
+    "all_time_points": 510,
+    "badges": [
+      "Bookworm"
+    ],
+    "created_at": "2026-11-02T22:53:44.894285"
+  },
+  "usr_vikram": {
+    "user_id": "usr_vikram",
+    "email": "vikram.s@iiitr.ac.in",
+    "password_hash": "93e77950c1d66d3a39a9212f354159495db7dbc3887e2f6f63b98da360f600ce",
+    "salt": "1790cb3fe3cd81509d54bf79258b574c",
+    "display_name": "Vikram Singh",
+    "avatar": "🏋️",
+    "all_time_points": 430,
+    "badges": [
+      "Gym Beast"
+    ],
+    "created_at": "2026-11-02T22:53:44.897681"
+  },
+  "usr_pooja": {
+    "user_id": "usr_pooja",
+    "email": "pooja.n@iiitr.ac.in",
+    "password_hash": "cd3b9466cbb424c631e4c4d61acba879690771df3b900e53be52e85b37480d18",
+    "salt": "aeb5bd37cdda4066a70bf32c46790217",
+    "display_name": "Pooja Nair",
+    "avatar": "🧘",
+    "all_time_points": 380,
+    "badges": [
+      "Zen Master"
+    ],
+    "created_at": "2026-11-02T22:53:44.899407"
+  },
+  "usr_karthik": {
+    "user_id": "usr_karthik",
+    "email": "karthik.r@iiitr.ac.in",
+    "password_hash": "3140edafcf3cdbbb230b4c158e985410446c30135acfc3a626c0cec09d3e8dc3",
+    "salt": "9423830ce7614a17832f2d40919e6862",
+    "display_name": "Karthik Reddy",
+    "avatar": "🌙",
+    "all_time_points": 350,
+    "badges": [
+      "Night Owl"
+    ],
+    "created_at": "2026-11-02T22:53:44.900900"
+  },
+  "usr_neha": {
+    "user_id": "usr_neha",
+    "email": "neha.j@iiitr.ac.in",
+    "password_hash": "5fa0defbd9bddf60387b707cd0bdea0cb6d2e3b4141cd153beb16fb7836ea721",
+    "salt": "2a2b459d792d39a5819f5793307b2786",
+    "display_name": "Neha Joshi",
+    "avatar": "🎨",
+    "all_time_points": 420,
+    "badges": [
+      "Creative Thinker"
+    ],
+    "created_at": "2026-11-02T22:53:44.903379"
+  },
+  "usr_aditya": {
+    "user_id": "usr_aditya",
+    "email": "aditya.m@iiitr.ac.in",
+    "password_hash": "9f86f310abbf6b5c9e85fcbb26056bb7bd3b599472a83adb8777da14110112be",
+    "salt": "e85d7be7220ffd702abfb41e0323992e",
+    "display_name": "Aditya Mehra",
+    "avatar": "⚽",
+    "all_time_points": 390,
+    "badges": [
+      "Sports Captain"
+    ],
+    "created_at": "2026-11-02T22:53:44.905548"
+  },
+  "usr_divya": {
+    "user_id": "usr_divya",
+    "email": "divya.r@iiitr.ac.in",
+    "password_hash": "4254379e5f78452b92654f7dbc80a53e3dfd0af342c8e800c0fae3b45ee2314c",
+    "salt": "4ed2c9ff383e37bdb6d5fa5b2c89cbe0",
+    "display_name": "Divya Rao",
+    "avatar": "🌿",
+    "all_time_points": 470,
+    "badges": [
+      "Hydration Hero"
+    ],
+    "created_at": "2026-11-02T22:53:44.907480"
+  },
+  "usr_varun": {
+    "user_id": "usr_varun",
+    "email": "varun.m@iiitr.ac.in",
+    "password_hash": "680c075255d1076778de9a505f6fbb583f7bd8c536d37f1bc5637d07f6eff319",
+    "salt": "1eda499f22b2a8688df39e6f2d668f14",
+    "display_name": "Varun Malhotra",
+    "avatar": "🧠",
+    "all_time_points": 340,
+    "badges": [
+      "Algorithm Ace"
+    ],
+    "created_at": "2026-11-02T22:53:44.909235"
+  },
+  "usr_shreya": {
+    "user_id": "usr_shreya",
+    "email": "shreya.s@iiitr.ac.in",
+    "password_hash": "3a42ffa891a387f4756b70cf435003b6b5718a1a691475c20faabdac23cc205a",
+    "salt": "8614ecb9f40dca6a9a896e5f6f39a91f",
+    "display_name": "Shreya Sen",
+    "avatar": "⭐",
+    "all_time_points": 500,
+    "badges": [
+      "Top Performer"
+    ],
+    "created_at": "2026-11-02T22:53:44.912209"
+  },
+  "usr_5d35b9f5df05": {
+    "user_id": "usr_5d35b9f5df05",
+    "email": "rinadevi8107@gmail.com",
+    "password_hash": "346d41571d1f982984fbf02b77a06731e6fb5abd605eb7742b25332dc8c3dd32",
+    "salt": "d2cec367fa567a18dba31ade3524f153",
+    "display_name": "akash patra",
+    "avatar": "👤",
+    "all_time_points": 0,
+    "badges": [],
+    "created_at": "2026-11-02T22:41:00.092698"
+  }
+}

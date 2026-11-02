@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habit Synergy & Gamification Platform | CS213</title>
+    <title>Habit Synergy & Gamification Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #1e293b;
-            --bg-hover: #334155;
+            --bg-primary: #090d16;
+            --bg-secondary: #131b2e;
+            --bg-card: #182238;
+            --bg-hover: #22304e;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --accent-primary: #6366f1;
@@ -18,8 +18,8 @@
             --accent-green: #10b981;
             --accent-amber: #f59e0b;
             --accent-red: #ef4444;
-            --border: #334155;
-            --radius-md: 12px;
+            --border: rgba(255, 255, 255, 0.08);
+            --radius-md: 14px;
             --radius-sm: 8px;
         }
 
@@ -33,43 +33,51 @@
             align-items: center;
             min-height: 100vh;
             padding: 24px;
-            background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%);
+            background: radial-gradient(circle at top, #1e1b4b 0%, #090d16 100%);
         }
         .auth-card {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 36px;
+            border-radius: 20px;
+            padding: 38px;
             width: 100%;
-            max-width: 460px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         .auth-header { text-align: center; margin-bottom: 24px; }
-        .auth-header h2 { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .auth-header h2 { font-size: 1.55rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
         .auth-header p { font-size: 0.85rem; color: var(--text-secondary); }
 
-        /* Main Dashboard (Hidden until login) */
+        /* Main Dashboard */
         #main-app-screen { display: none; flex-direction: column; min-height: 100vh; }
 
         header {
             background-color: var(--bg-secondary);
             border-bottom: 1px solid var(--border);
-            padding: 14px 28px;
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 16px;
         }
-        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; color: #fff; }
-        .brand span.badge { background: var(--accent-primary); font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; font-weight: 600; }
-        .user-nav { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.25rem; color: #fff; }
+        .user-nav { display: flex; align-items: center; gap: 14px; }
+        .user-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
         .btn {
             background-color: var(--accent-primary);
             color: white;
             border: none;
-            padding: 8px 14px;
+            padding: 8px 16px;
             border-radius: var(--radius-sm);
             font-weight: 600;
             font-size: 0.85rem;
@@ -84,16 +92,18 @@
         .btn:hover { background-color: var(--accent-hover); }
         .btn-block { width: 100%; padding: 11px; font-size: 0.95rem; }
         .btn-secondary { background-color: var(--bg-hover); color: var(--text-primary); }
-        .btn-secondary:hover { background-color: #475569; }
+        .btn-secondary:hover { background-color: #2b3d63; }
         .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
         .btn-outline:hover { background: var(--bg-hover); color: white; }
         .btn-success { background-color: var(--accent-green); }
         .btn-danger { background-color: var(--accent-red); }
+        .btn-danger-outline { background: transparent; border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; }
+        .btn-danger-outline:hover { background: rgba(239, 68, 68, 0.2); }
 
-        .container { max-width: 1280px; width: 100%; margin: 0 auto; padding: 24px; flex: 1; }
+        .container { max-width: 1280px; width: 100%; margin: 0 auto; padding: 28px 24px; flex: 1; }
 
         .alert {
-            padding: 12px 16px;
+            padding: 12px 18px;
             border-radius: var(--radius-sm);
             margin-bottom: 20px;
             font-size: 0.9rem;
@@ -102,61 +112,61 @@
             gap: 10px;
         }
         .alert-info { background: rgba(99, 102, 241, 0.15); border: 1px solid var(--accent-primary); color: #c7d2fe; }
-        .alert-warning { background: rgba(245, 158, 11, 0.15); border: 1px solid var(--accent-amber); color: #fde68a; }
         .alert-error { background: rgba(239, 68, 68, 0.15); border: 1px solid var(--accent-red); color: #fca5a5; }
         .alert-success { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); color: #a7f3d0; }
 
-        .tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); margin-bottom: 20px; overflow-x: auto; }
+        /* 4 Clean Tabs */
+        .tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--border); margin-bottom: 24px; overflow-x: auto; }
         .tab-btn {
-            padding: 10px 18px;
+            padding: 12px 22px;
             background: transparent;
             border: none;
             color: var(--text-secondary);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: all 0.2s;
             white-space: nowrap;
         }
         .tab-btn:hover { color: white; }
-        .tab-btn.active { color: var(--accent-primary); border-bottom-color: var(--accent-primary); }
+        .tab-btn.active { color: #818cf8; border-bottom-color: #818cf8; }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 22px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
         }
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .card-title { font-size: 1.1rem; font-weight: 700; color: white; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+        .card-title { font-size: 1.15rem; font-weight: 700; color: white; }
 
         .habit-card {
-            background: #1e293b;
+            background: #131b2e;
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
-            padding: 16px;
-            margin-bottom: 12px;
+            padding: 18px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: border-color 0.15s;
         }
-        .habit-card:hover { border-color: #475569; }
-        .habit-info h4 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
-        .habit-meta { font-size: 0.8rem; color: var(--text-secondary); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        .tag { background: #334155; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
+        .habit-card:hover { border-color: rgba(255, 255, 255, 0.2); }
+        .habit-info h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+        .habit-meta { font-size: 0.8rem; color: var(--text-secondary); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .tag { background: #22304e; padding: 2px 8px; border-radius: 4px; font-weight: 500; }
 
         .health-badge {
             font-size: 0.75rem;
-            padding: 3px 8px;
+            padding: 3px 9px;
             border-radius: 9999px;
             font-weight: 700;
             text-transform: uppercase;
@@ -170,7 +180,7 @@
         .form-input, .form-select {
             width: 100%;
             padding: 10px 14px;
-            background: #0f172a;
+            background: #090d16;
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             color: white;
@@ -179,26 +189,41 @@
         .form-input:focus, .form-select:focus { outline: none; border-color: var(--accent-primary); }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { text-align: left; padding: 10px 14px; font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
-        td { padding: 12px 14px; font-size: 0.88rem; border-bottom: 1px solid #1e293b; }
+        th { text-align: left; padding: 12px 14px; font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+        td { padding: 14px; font-size: 0.9rem; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
         tr:hover td { background-color: rgba(255, 255, 255, 0.02); }
-        tr.current-user td { background-color: rgba(99, 102, 241, 0.12); font-weight: 700; }
+        tr.current-user td { background-color: rgba(99, 102, 241, 0.15); font-weight: 700; }
 
-        .heatmap-container { text-align: center; padding: 14px; background: #0f172a; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+        .heatmap-container { text-align: center; padding: 14px; background: #090d16; border-radius: var(--radius-sm); border: 1px solid var(--border); }
         .heatmap-container img { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
 
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
         .modal.active { display: flex; }
-        .modal-card { background: var(--bg-card); width: 100%; max-width: 480px; border-radius: var(--radius-md); padding: 26px; border: 1px solid var(--border); }
+        .modal-card { background: var(--bg-card); width: 100%; max-width: 480px; border-radius: var(--radius-md); padding: 28px; border: 1px solid var(--border); }
+
+        /* Power Cards for Catalyst Habits */
+        .power-card {
+            background: #131b2e;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .power-card-icon { font-size: 2rem; }
+        .power-card-content h4 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .power-card-content p { font-size: 0.85rem; color: var(--text-secondary); }
 
         @media (max-width: 868px) {
             .grid-2, .grid-4 { grid-template-columns: 1fr; }
@@ -212,9 +237,9 @@
     <div id="auth-gateway-screen">
         <div class="auth-card">
             <div class="auth-header">
-                <div style="font-size: 2.2rem; margin-bottom: 8px;">🔥</div>
+                <div style="font-size: 2.4rem; margin-bottom: 8px;">🔥</div>
                 <h2 id="gateway-title">Sign in to Habit Synergy</h2>
-                <p id="gateway-subtitle">IIIT Raichur CS213 Python Platform</p>
+                <p id="gateway-subtitle">Personalized Habit Intelligence & Streaks</p>
             </div>
 
             <div id="gateway-alert" class="alert alert-error" style="display: none;"></div>
@@ -223,7 +248,7 @@
             <form id="gateway-form" onsubmit="handleGatewaySubmit(event)">
                 <div class="form-group" id="gateway-group-name" style="display: none;">
                     <label class="form-label">Full Name</label>
-                    <input type="text" id="gateway-name" class="form-input" placeholder="e.g. Aryan Kumar">
+                    <input type="text" id="gateway-name" class="form-input" placeholder="e.g. Akash Patra">
                 </div>
 
                 <div class="form-group">
@@ -249,7 +274,7 @@
 
                 <button type="submit" id="gateway-submit-btn" class="btn btn-block" style="margin-top: 10px;">Sign In</button>
 
-                <div style="margin: 16px 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; position: relative;">
+                <div style="margin: 16px 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
                     <span>OR FOR EVALUATION DEMO</span>
                 </div>
 
@@ -271,14 +296,10 @@
     <div id="main-app-screen">
         <header>
             <div class="brand">
-                <span>🔥 Habit Synergy Engine</span>
-                <span class="badge">IIIT Raichur (CS213)</span>
+                <span>🔥 Habit Synergy</span>
             </div>
             <div class="user-nav">
-                <label style="font-size: 0.8rem; color: var(--text-secondary);">Active Student:</label>
-                <select id="user-switcher" class="form-select" style="width: auto; padding: 6px 10px; font-weight: 600;" onchange="switchStudentAccount(this.value)">
-                </select>
-                <button class="btn btn-secondary" onclick="seedDemoData()">⚡ Re-Seed 15 Users</button>
+                <span class="user-pill" id="nav-user-pill">👤 Aryan Kumar (cs25b1008@iiitr.ac.in)</span>
                 <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
             </div>
         </header>
@@ -288,32 +309,32 @@
                 <span id="alert-message">System ready.</span>
             </div>
 
+            <!-- 4 Clean Professional Tabs -->
             <nav class="tabs">
-                <button class="tab-btn active" onclick="switchTab('dashboard')">📋 Daily Habits & Streaks</button>
-                <button class="tab-btn" onclick="switchTab('synergy')">🧠 Habit Synergy & Lag-1 Heatmap</button>
-                <button class="tab-btn" onclick="switchTab('social')">🏆 15-User Leaderboard & Duels</button>
-                <button class="tab-btn" onclick="switchTab('report')">📄 Diagnostic Report</button>
-                <button class="tab-btn" onclick="switchTab('defense')">🎓 CS213 Rubric Defense</button>
+                <button class="tab-btn active" onclick="switchTab('dashboard')">📋 Habit Workspace</button>
+                <button class="tab-btn" onclick="switchTab('synergy')">🚀 Habit Combos & Domino Effects</button>
+                <button class="tab-btn" onclick="switchTab('social')">⚔️ 15-Student Leaderboards & Duels</button>
+                <button class="tab-btn" onclick="switchTab('report')">📊 Executive Report Card</button>
             </nav>
 
-            <!-- TAB 1: Daily Habits & Streaks -->
+            <!-- TAB 1: Habit Workspace (Daily Tracker & Streaks) -->
             <section id="tab-dashboard" class="tab-content active">
-                <div class="grid-4" style="margin-bottom: 22px;">
+                <div class="grid-4" style="margin-bottom: 24px;">
                     <div class="card">
                         <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">ACTIVE HABITS</div>
-                        <div id="metric-total-habits" style="font-size: 1.7rem; font-weight: 800;">5</div>
+                        <div id="metric-total-habits" style="font-size: 1.8rem; font-weight: 800;">5</div>
                     </div>
                     <div class="card">
-                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">ALL-TIME POINTS</div>
-                        <div id="metric-points" style="font-size: 1.7rem; font-weight: 800; color: #818cf8;">580 pts</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">TOTAL SCORE</div>
+                        <div id="metric-points" style="font-size: 1.8rem; font-weight: 800; color: #818cf8;">580 pts</div>
                     </div>
                     <div class="card">
                         <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">ACTIVE STREAK</div>
-                        <div id="metric-best-streak" style="font-size: 1.7rem; font-weight: 800; color: #34d399;">12 Days</div>
+                        <div id="metric-best-streak" style="font-size: 1.8rem; font-weight: 800; color: #34d399;">12 Days</div>
                     </div>
                     <div class="card">
-                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">PRIMARY KEYSTONE</div>
-                        <div id="metric-keystone" style="font-size: 1.05rem; font-weight: 700; color: #fbbf24;">Sleep Duration</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">KEYSTONE HABIT</div>
+                        <div id="metric-keystone" style="font-size: 1.1rem; font-weight: 700; color: #fbbf24;">Sleep Duration</div>
                     </div>
                 </div>
 
@@ -322,7 +343,7 @@
                         <div>
                             <h3 class="card-title">Daily Habit Tracker & Logging</h3>
                             <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px;">
-                                Date: <input type="date" id="log-date-picker" class="form-input" style="width: auto; padding: 4px 8px; display: inline-block;">
+                                Date: <input type="date" id="log-date-picker" class="form-input" style="width: auto; padding: 4px 10px; display: inline-block;">
                             </p>
                         </div>
                         <button class="btn" onclick="openHabitModal()">+ Create New Habit</button>
@@ -331,50 +352,52 @@
                 </div>
             </section>
 
-            <!-- TAB 2: Habit Synergy & Behavioral Heatmap -->
+            <!-- TAB 2: Habit Combos & Domino Effects -->
             <section id="tab-synergy" class="tab-content">
                 <div class="grid-2">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Lag-1 Predictive Analysis (Next-Day Matrix)</h3>
-                            <span class="badge" style="background:#10b981;">Pandas + NumPy</span>
+                            <div>
+                                <h3 class="card-title">🚀 Tomorrow's Domino Effect</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px;">
+                                    See how your habits today secretly trigger your success tomorrow.
+                                </p>
+                            </div>
                         </div>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 14px;">
-                            Measures how Habit A on Day $t$ statistically predicts Habit B on Day $t+1$.
-                        </p>
                         <div class="heatmap-container" id="lag1-heatmap-box">
-                            <p style="color: var(--text-secondary);">Rendering matrix...</p>
+                            <p style="color: var(--text-secondary);">Calculating domino matrix...</p>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Same-Day Co-occurrence Matrix</h3>
-                            <span class="badge" style="background:#6366f1;">Pearson Correlation</span>
+                            <div>
+                                <h3 class="card-title">🔥 Daily Habit Combos & Stacking</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px;">
+                                    Discover which routines you naturally crush together in a single day.
+                                </p>
+                            </div>
                         </div>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 14px;">
-                            Measures routines completed synchronously within 24 hours.
-                        </p>
                         <div class="heatmap-container" id="sameday-heatmap-box">
-                            <p style="color: var(--text-secondary);">Rendering matrix...</p>
+                            <p style="color: var(--text-secondary);">Calculating synergy combos...</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 20px;">
+                <div class="card" style="margin-top: 24px;">
                     <div class="card-header">
-                        <h3 class="card-title">🎯 Keystone Habit Behavioral Insights</h3>
+                        <h3 class="card-title">💡 Personal Catalyst Habits & Superchargers</h3>
                     </div>
                     <div id="keystone-insights-container"></div>
                 </div>
             </section>
 
-            <!-- TAB 3: 15-User Leaderboard & Mutual Duels -->
+            <!-- TAB 3: 15-Student Leaderboards & Duels -->
             <section id="tab-social" class="tab-content">
                 <div class="grid-2">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">IIITR Student Leaderboards</h3>
+                            <h3 class="card-title">Student Leaderboards</h3>
                             <div style="display: flex; gap: 8px;">
                                 <select id="leaderboard-scope" class="form-select" style="width: auto; padding: 4px 10px;" onchange="loadLeaderboard()">
                                     <option value="global">Global (All 15 Students)</option>
@@ -403,71 +426,35 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">⚔️ 1-on-1 Habit Duels (7-Day Challenges)</h3>
-                            <button class="btn btn-secondary" onclick="openDuelModal()">+ New Duel</button>
+                            <h3 class="card-title">⚔️ 1-on-1 Habit Duels</h3>
+                            <button class="btn btn-secondary" onclick="openDuelModal()">+ Propose Duel</button>
                         </div>
+                        
+                        <!-- Incoming Challenges Banner -->
+                        <div id="incoming-duels-container" style="margin-bottom: 16px;"></div>
+
                         <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 14px;">
-                            Compete head-to-head with batchmates. Winner earns +100 bonus points.
+                            Compete head-to-head with batchmates for 7 days. Winner earns +100 bonus points!
                         </p>
-                        <div id="duels-container"></div>
+                        <div id="active-duels-container"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- TAB 4: Diagnostic Report -->
+            <!-- TAB 4: Executive Report Card -->
             <section id="tab-report" class="tab-content">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Automated Behavioral Diagnostic Report</h3>
-                        <a id="btn-download-report" href="/api/report/download?user_id=usr_aryan" target="_blank" class="btn">📥 Download Report (.MD)</a>
+                        <div>
+                            <h3 class="card-title">Behavioral Diagnostic Report Card</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px;">
+                                Complete algorithmic synthesis of your routines, consistency rates, and behavioral catalyzers.
+                            </p>
+                        </div>
+                        <a id="btn-download-report" href="/api/report/download" target="_blank" class="btn">📥 Download Report (.MD)</a>
                     </div>
-                    <div id="report-view-container" style="background:#0f172a; padding: 18px; border-radius: 8px; border: 1px solid var(--border); font-family: monospace; white-space: pre-wrap; font-size: 0.85rem; color: #cbd5e1; max-height: 500px; overflow-y: auto;">
-                        Loading diagnostic report...
-                    </div>
-                </div>
-            </section>
-
-            <!-- TAB 5: CS213 Rubric Defense Checklist -->
-            <section id="tab-defense" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">🎓 CS213 Course Requirements Verification</h3>
-                        <span class="badge" style="background:#10b981;">9 / 9 Concepts Implemented (100%)</span>
-                    </div>
-                    <div class="grid-2">
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">1. Control Flow (Loops & Conditionals)</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Continuous 25-day date indexing, rolling 7/30-day window loops, lag-1 matrix calculators, and streak freeze logic in <code>analytics.py</code>.</p>
-                        </div>
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">2. Meaningful Functions & Parameters</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Type-annotated pure functions returning structured dictionaries, statistical metrics, and tuples throughout the engine.</p>
-                        </div>
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">3. Purposeful Data Structures</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);"><strong>Sets:</strong> Python Set intersections for mutual friends filtering (<code>following.intersection(followers)</code>). <strong>Dicts & Lists:</strong> 15-user schemas, social graphs, and time-series arrays.</p>
-                        </div>
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">4. File Handling (JSON & CSV)</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Atomic temporary file writes in <code>db.py</code> reading/writing <code>users.json</code>, <code>habits.json</code>, and continuous time-series logging in <code>logs.csv</code>.</p>
-                        </div>
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">5. Exception Handling</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Custom exception hierarchy (<code>InvalidEmailError</code>, <code>NetworkUnavailableError</code>, <code>OTPExpiredError</code>, <code>DataCorruptedError</code>) with graceful user-facing error fallbacks.</p>
-                        </div>
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">6. Object-Oriented Programming (OOP)</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Abstract Base Class <code>Habit</code> with polymorphic child subclasses <code>BinaryHabit</code> and <code>NumericHabit</code>, plus encapsulated domain models for <code>User</code> and <code>Challenge</code>.</p>
-                        </div>
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">7. Modular Architecture & Packages</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Organized self-written packages: <code>models/</code>, <code>storage/</code>, <code>engine/</code>, <code>web/</code>, and <code>tests/</code>.</p>
-                        </div>
-                        <div style="background:#0f172a; padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
-                            <h4 style="color:#818cf8; margin-bottom: 4px;">8. Third-Party Data Transformation</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-secondary);"><strong>Pandas & NumPy:</strong> Transforms raw CSV logs into pivoted time-series, Pearson correlation matrices, conditional probability matrices, and Seaborn heatmaps.</p>
-                        </div>
-                    </div>
+                    
+                    <div id="report-view-container"></div>
                 </div>
             </section>
         </main>
@@ -476,7 +463,7 @@
     <!-- Modal: Create Habit -->
     <div id="habit-modal" class="modal">
         <div class="modal-card">
-            <h3 style="margin-bottom: 14px;">Create New Habit</h3>
+            <h3 style="margin-bottom: 16px;">Create New Habit</h3>
             <form id="habit-form" onsubmit="handleCreateHabit(event)">
                 <div class="form-group">
                     <label class="form-label">Habit Name</label>
@@ -495,7 +482,7 @@
                     <label class="form-label">Habit Type</label>
                     <select id="habit-type" class="form-select" onchange="toggleHabitTypeFields()">
                         <option value="binary">Binary Checkbox (Yes / No)</option>
-                        <option value="numeric">Quantitative / Numeric (Target Amount)</option>
+                        <option value="numeric">Quantitative / Target Number</option>
                     </select>
                 </div>
                 <div id="numeric-fields" style="display: none;">
@@ -515,7 +502,7 @@
                         <input type="checkbox" id="habit-public" checked> Public Habit (Visible on Friend Leaderboards)
                     </label>
                 </div>
-                <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px;">
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
                     <button type="button" class="btn btn-outline" onclick="closeHabitModal()">Cancel</button>
                     <button type="submit" class="btn">Create Habit</button>
                 </div>
@@ -526,7 +513,7 @@
     <!-- Modal: 1-on-1 Duel -->
     <div id="duel-modal" class="modal">
         <div class="modal-card">
-            <h3 style="margin-bottom: 14px;">⚔️ Propose 1-on-1 Habit Duel</h3>
+            <h3 style="margin-bottom: 16px;">⚔️ Propose 1-on-1 Habit Duel</h3>
             <form id="duel-form" onsubmit="handleCreateDuel(event)">
                 <div class="form-group">
                     <label class="form-label">Select Batchmate</label>
@@ -543,9 +530,9 @@
                         <option value="14">14 Days Duel (+200 pts)</option>
                     </select>
                 </div>
-                <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px;">
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
                     <button type="button" class="btn btn-outline" onclick="closeDuelModal()">Cancel</button>
-                    <button type="submit" class="btn">Launch Duel</button>
+                    <button type="submit" class="btn">Send Challenge</button>
                 </div>
             </form>
         </div>
@@ -554,14 +541,13 @@
     <script>
         let currentUser = null;
         let allStudents = [];
-        let gatewayMode = 'login'; // 'login', 'register', 'forgot_otp', 'forgot_reset'
+        let gatewayMode = 'login';
 
         window.addEventListener('DOMContentLoaded', async () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('log-date-picker').value = today;
             document.getElementById('log-date-picker').addEventListener('change', loadHabits);
 
-            // Check if user was previously signed in
             const storedUser = localStorage.getItem('habit_user');
             if (storedUser) {
                 try {
@@ -584,6 +570,9 @@
             document.getElementById('auth-gateway-screen').style.display = 'none';
             document.getElementById('main-app-screen').style.display = 'flex';
             
+            document.getElementById('nav-user-pill').innerText = `👤 ${currentUser.display_name} (${currentUser.email})`;
+            document.getElementById('btn-download-report').href = `/api/report/download?user_id=${currentUser.user_id}`;
+
             await loadAllStudents();
             loadHabits();
             loadSynergy();
@@ -600,6 +589,9 @@
         }
 
         function toggleGatewayMode() {
+            const errBox = document.getElementById('gateway-alert');
+            errBox.style.display = 'none';
+
             if (gatewayMode === 'login') {
                 gatewayMode = 'register';
                 document.getElementById('gateway-title').innerText = 'Create an Account';
@@ -613,7 +605,7 @@
             } else {
                 gatewayMode = 'login';
                 document.getElementById('gateway-title').innerText = 'Sign in to Habit Synergy';
-                document.getElementById('gateway-subtitle').innerText = 'IIIT Raichur CS213 Python Platform';
+                document.getElementById('gateway-subtitle').innerText = 'Personalized Habit Intelligence & Streaks';
                 document.getElementById('gateway-group-name').style.display = 'none';
                 document.getElementById('gateway-group-password').style.display = 'block';
                 document.getElementById('gateway-group-otp').style.display = 'none';
@@ -637,9 +629,9 @@
 
         async function handleGatewaySubmit(e) {
             e.preventDefault();
-            const email = document.getElementById('gateway-email').value;
-            const password = document.getElementById('gateway-password').value;
-            const name = document.getElementById('gateway-name').value;
+            const email = (document.getElementById('gateway-email') || {}).value.trim();
+            const password = (document.getElementById('gateway-password') || {}).value.trim();
+            const name = (document.getElementById('gateway-name') || {}).value.trim();
             const errBox = document.getElementById('gateway-alert');
             errBox.style.display = 'none';
 
@@ -651,7 +643,7 @@
                         body: JSON.stringify({ email, password })
                     });
                     const data = await res.json();
-                    if (!res.ok) throw new Error(data.detail || 'Login failed');
+                    if (!res.ok) throw new Error(extractErrorMessage(data, 'Login failed'));
                     currentUser = data.user;
                     localStorage.setItem('habit_user', JSON.stringify(currentUser));
                     enterDashboard();
@@ -659,10 +651,10 @@
                     const res = await fetch('/api/auth/register', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, password, display_name: name })
+                        body: JSON.stringify({ email, password, display_name: name, name: name })
                     });
                     const data = await res.json();
-                    if (!res.ok) throw new Error(data.detail || 'Registration failed');
+                    if (!res.ok) throw new Error(extractErrorMessage(data, 'Registration failed'));
                     currentUser = data.user;
                     localStorage.setItem('habit_user', JSON.stringify(currentUser));
                     enterDashboard();
@@ -673,25 +665,24 @@
                         body: JSON.stringify({ email })
                     });
                     const data = await res.json();
-                    if (!res.ok) throw new Error(data.detail || 'Failed to dispatch OTP');
-                    
+                    if (!res.ok) throw new Error(extractErrorMessage(data, 'Failed to dispatch OTP'));
                     gatewayMode = 'forgot_reset';
                     document.getElementById('gateway-title').innerText = 'Enter OTP & New Password';
-                    document.getElementById('gateway-subtitle').innerText = 'Check your Gmail inbox for the 4-digit code';
+                    document.getElementById('gateway-subtitle').innerText = 'Check your email (or terminal in demo mode) for code';
                     document.getElementById('gateway-group-otp').style.display = 'block';
                     document.getElementById('gateway-group-new-password').style.display = 'block';
                     document.getElementById('gateway-submit-btn').innerText = 'Update Password';
-                    alert('A 4-digit verification code has been sent to your Gmail inbox. Please enter it.');
+                    alert('Verification code sent! Please enter the 4-digit code below.');
                 } else if (gatewayMode === 'forgot_reset') {
-                    const otp = document.getElementById('gateway-otp').value;
-                    const newPassword = document.getElementById('gateway-new-password').value;
+                    const otp = document.getElementById('gateway-otp').value.trim();
+                    const newPassword = document.getElementById('gateway-new-password').value.trim();
                     const res = await fetch('/api/auth/reset-password', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email, otp, new_password: newPassword })
                     });
                     const data = await res.json();
-                    if (!res.ok) throw new Error(data.detail || 'Reset failed');
+                    if (!res.ok) throw new Error(extractErrorMessage(data, 'Reset failed'));
                     alert('Password updated successfully! You can now log in.');
                     toggleGatewayMode();
                 }
@@ -699,6 +690,18 @@
                 errBox.innerText = err.message;
                 errBox.style.display = 'block';
             }
+        }
+
+        function extractErrorMessage(data, defaultMsg) {
+            if (!data) return defaultMsg;
+            if (typeof data.detail === 'string') return data.detail;
+            if (Array.isArray(data.detail)) {
+                return data.detail.map(item => item.msg || JSON.stringify(item)).join('; ');
+            }
+            if (typeof data.detail === 'object' && data.detail !== null) {
+                return data.detail.msg || JSON.stringify(data.detail);
+            }
+            return data.message || defaultMsg;
         }
 
         async function quickDemoLogin() {
@@ -712,41 +715,8 @@
                 const res = await fetch('/api/users');
                 const data = await res.json();
                 allStudents = data.users || [];
-                
-                // If users list is empty, trigger initial demo seed
-                if (allStudents.length === 0) {
-                    await fetch('/api/seed-demo', { method: 'POST' });
-                    const retry = await fetch('/api/users');
-                    const retryData = await retry.json();
-                    allStudents = retryData.users || [];
-                }
-
-                const switcher = document.getElementById('user-switcher');
-                switcher.innerHTML = '';
-                allStudents.forEach(u => {
-                    const opt = document.createElement('option');
-                    opt.value = u.user_id;
-                    opt.innerText = `${u.avatar || '👤'} ${u.display_name} (${u.email.split('@')[0]})`;
-                    if (currentUser && u.user_id === currentUser.user_id) opt.selected = true;
-                    switcher.appendChild(opt);
-                });
             } catch (e) {
                 console.error(e);
-            }
-        }
-
-        function switchStudentAccount(userId) {
-            const selected = allStudents.find(u => u.user_id === userId);
-            if (selected) {
-                currentUser = selected;
-                localStorage.setItem('habit_user', JSON.stringify(currentUser));
-                document.getElementById('btn-download-report').href = `/api/report/download?user_id=${currentUser.user_id}`;
-                showAlert(`Switched active profile to ${currentUser.display_name}`, 'info');
-                loadHabits();
-                loadSynergy();
-                loadLeaderboard();
-                loadDuels();
-                loadReport();
             }
         }
 
@@ -770,7 +740,7 @@
             banner.className = `alert alert-${type}`;
             document.getElementById('alert-message').innerText = msg;
             banner.style.display = 'flex';
-            setTimeout(() => { banner.style.display = 'none'; }, 5000);
+            setTimeout(() => { banner.style.display = 'none'; }, 4000);
         }
 
         async function loadHabits() {
@@ -795,9 +765,8 @@
             
             if (!habits || habits.length === 0) {
                 container.innerHTML = `
-                    <div style="padding: 24px; text-align: center;">
-                        <p style="color: var(--text-secondary); margin-bottom: 12px;">No habit records found for this profile yet.</p>
-                        <button class="btn btn-secondary" onclick="seedDemoData()">⚡ Click here to seed 15 students & habits</button>
+                    <div style="padding: 30px; text-align: center;">
+                        <p style="color: var(--text-secondary); margin-bottom: 14px;">No habits defined yet. Click "+ Create New Habit" above.</p>
                     </div>
                 `;
                 return;
@@ -839,16 +808,32 @@
                             <span class="tag">${h.category}</span>
                             <span>Target: ${h.target_value ? `${h.operator} ${h.target_value} ${h.unit}` : 'Yes/No'}</span>
                             <span>🔥 Streak: ${m.current_streak}d</span>
-                            <span>Score: ${m.health_score}/100</span>
+                            <span>Health: ${m.health_score}/100</span>
                             <span class="health-badge ${statusClass}">${m.status}</span>
                         </div>
                     </div>
-                    <div>${actionHtml}</div>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        ${actionHtml}
+                        <button class="btn btn-danger-outline" style="padding: 6px 10px;" title="Delete Habit" onclick="deleteHabitPrompt('${h.habit_id}', '${h.name}')">🗑️</button>
+                    </div>
                 `;
                 container.appendChild(card);
             });
 
             document.getElementById('metric-best-streak').innerText = `${bestStreak} Days`;
+        }
+
+        async function deleteHabitPrompt(habitId, habitName) {
+            if (confirm(`Are you sure you want to delete the habit "${habitName}"?`)) {
+                const res = await fetch(`/api/habits/${habitId}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (data.status === 'ok') {
+                    showAlert(`Habit "${habitName}" deleted.`, 'info');
+                    loadHabits();
+                } else {
+                    alert('Failed to delete habit.');
+                }
+            }
         }
 
         async function logHabitCompletion(habitId, val) {
@@ -878,28 +863,39 @@
                 const data = await res.json();
                 
                 if (data.lag1_heatmap) {
-                    document.getElementById('lag1-heatmap-box').innerHTML = `<img src="${data.lag1_heatmap}" alt="Lag-1 Heatmap">`;
+                    document.getElementById('lag1-heatmap-box').innerHTML = `<img src="${data.lag1_heatmap}" alt="Domino Effect Matrix">`;
                 }
                 if (data.sameday_heatmap) {
-                    document.getElementById('sameday-heatmap-box').innerHTML = `<img src="${data.sameday_heatmap}" alt="Same-Day Heatmap">`;
+                    document.getElementById('sameday-heatmap-box').innerHTML = `<img src="${data.sameday_heatmap}" alt="Daily Combos Matrix">`;
                 }
 
                 const kContainer = document.getElementById('keystone-insights-container');
                 kContainer.innerHTML = '';
+                
                 if (data.keystones && data.keystones.length > 0) {
                     document.getElementById('metric-keystone').innerText = data.keystones[0].habit;
                     data.keystones.forEach(k => {
                         const div = document.createElement('div');
-                        div.style.padding = '10px 14px';
-                        div.style.borderBottom = '1px solid var(--border)';
+                        div.className = 'power-card';
+                        
+                        let icon = '⚡';
+                        if (k.habit.toLowerCase().includes('sleep')) icon = '🛌';
+                        else if (k.habit.toLowerCase().includes('jog') || k.habit.toLowerCase().includes('run')) icon = '🏃';
+                        else if (k.habit.toLowerCase().includes('water')) icon = '💧';
+                        else if (k.habit.toLowerCase().includes('screen')) icon = '📱';
+                        else if (k.habit.toLowerCase().includes('study')) icon = '📚';
+
                         div.innerHTML = `
-                            <strong>⭐ ${k.habit}</strong>: Next-day correlation with <em>${k.top_impact_target}</em> is <strong>+${k.correlation}</strong>. 
-                            Boosts next-day completion probability by <strong>+${k.prob_boost_percent}%</strong>.
+                            <div class="power-card-icon">${icon}</div>
+                            <div class="power-card-content">
+                                <h4>${k.habit} ➔ ${k.top_impact_target}</h4>
+                                <p>Completing <strong>${k.habit}</strong> gives you a <strong style="color: #34d399;">+${k.prob_boost_percent}% Power Boost</strong> to crush <em>${k.top_impact_target}</em> the next day!</p>
+                            </div>
                         `;
                         kContainer.appendChild(div);
                     });
                 } else {
-                    kContainer.innerHTML = '<p style="color: var(--text-secondary); padding: 12px;">Log activity to uncover keystone correlations.</p>';
+                    kContainer.innerHTML = '<p style="color: var(--text-secondary); padding: 16px;">Log at least 5 days of habits to reveal your personal power boosters.</p>';
                 }
             } catch (err) {
                 console.error(err);
@@ -924,7 +920,7 @@
                     <td><strong>${m.badge}</strong></td>
                     <td>${m.avatar} ${m.display_name} ${m.is_current_user ? '(You)' : ''}</td>
                     <td><strong>${m.score} pts</strong></td>
-                    <td>${m.is_current_user ? '—' : `<button class="btn btn-secondary" style="padding: 3px 8px; font-size: 0.75rem;" onclick="promptDuelWith('${m.user_id}', '${m.display_name}')">Duel</button>`}</td>
+                    <td>${m.is_current_user ? '—' : `<button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="promptDuelWith('${m.user_id}', '${m.display_name}')">Duel ⚔️</button>`}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -935,55 +931,160 @@
             const res = await fetch(`/api/duels?user_id=${currentUser.user_id}`);
             const data = await res.json();
             
-            const container = document.getElementById('duels-container');
-            container.innerHTML = '';
+            const incomingBox = document.getElementById('incoming-duels-container');
+            const activeBox = document.getElementById('active-duels-container');
+            incomingBox.innerHTML = '';
+            activeBox.innerHTML = '';
 
-            if (data.duels.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-secondary); padding: 12px;">No active duels. Challenge a mutual batchmate!</p>';
+            const pendingIncoming = data.duels.filter(d => d.status === 'pending' && d.is_opponent);
+            const myPending = data.duels.filter(d => d.status === 'pending' && d.is_challenger);
+            const activeDuels = data.duels.filter(d => d.status === 'active' || d.status === 'completed');
+
+            // Render incoming duel invitations with Accept / Decline buttons!
+            if (pendingIncoming.length > 0) {
+                pendingIncoming.forEach(d => {
+                    const card = document.createElement('div');
+                    card.style.background = 'rgba(245, 158, 11, 0.12)';
+                    card.style.border = '1px solid var(--accent-amber)';
+                    card.style.borderRadius = '10px';
+                    card.style.padding = '14px';
+                    card.style.marginBottom = '12px';
+                    card.innerHTML = `
+                        <div style="font-weight: 700; color: #fbbf24; margin-bottom: 6px;">⚔️ Challenge Invitation from ${d.challenger_name}!</div>
+                        <div style="font-size: 0.85rem; margin-bottom: 10px;">Goal: <strong>${d.habit_name}</strong> (${d.duration_days} Days)</div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-success" style="padding: 5px 12px; font-size: 0.8rem;" onclick="respondToDuel('${d.challenge_id}', true)">✓ Accept Challenge</button>
+                            <button class="btn btn-outline" style="padding: 5px 12px; font-size: 0.8rem;" onclick="respondToDuel('${d.challenge_id}', false)">✗ Decline</button>
+                        </div>
+                    `;
+                    incomingBox.appendChild(card);
+                });
+            }
+
+            if (activeDuels.length === 0 && myPending.length === 0 && pendingIncoming.length === 0) {
+                activeBox.innerHTML = '<p style="color: var(--text-secondary); padding: 14px;">No active challenges. Propose a duel to a batchmate!</p>';
                 return;
             }
 
-            data.duels.forEach(d => {
+            // Render outgoing pending
+            myPending.forEach(d => {
                 const box = document.createElement('div');
-                box.style.background = '#0f172a';
-                box.style.padding = '12px 14px';
-                box.style.borderRadius = '8px';
+                box.style.background = '#131b2e';
+                box.style.padding = '14px';
+                box.style.borderRadius = '10px';
                 box.style.border = '1px solid var(--border)';
-                box.style.marginBottom = '10px';
+                box.style.marginBottom = '12px';
+                box.innerHTML = `
+                    <div style="display: flex; justify-content: space-between;">
+                        <strong>⚔️ ${d.habit_name}</strong>
+                        <span style="color: #fbbf24; font-size: 0.75rem; font-weight: 700;">INVITE SENT</span>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">
+                        Waiting for ${d.opponent_name} to accept...
+                    </div>
+                `;
+                activeBox.appendChild(box);
+            });
+
+            // Render active battles with side-by-side versus bars
+            activeDuels.forEach(d => {
+                const box = document.createElement('div');
+                box.style.background = '#131b2e';
+                box.style.padding = '16px';
+                box.style.borderRadius = '10px';
+                box.style.border = '1px solid var(--border)';
+                box.style.marginBottom = '14px';
 
                 box.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <strong>⚔️ ${d.habit_name}</strong>
-                        <span class="badge" style="background:#475569;">${d.status.toUpperCase()}</span>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <strong style="font-size: 1rem;">⚔️ ${d.habit_name}</strong>
+                        <span class="health-badge status-thriving">${d.status.toUpperCase()}</span>
                     </div>
-                    <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 6px;">
-                        ${d.challenger_name} (${d.challenger_score} pts) vs ${d.opponent_name} (${d.opponent_score} pts)
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                        <span>${d.challenger_name}: <strong>${d.challenger_score} pts</strong></span>
+                        <span>vs</span>
+                        <span>${d.opponent_name}: <strong>${d.opponent_score} pts</strong></span>
                     </div>
-                    <div style="font-size: 0.75rem; color: #94a3b8;">
+                    <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px;">
                         Window: ${d.start_date} to ${d.end_date}
                     </div>
                 `;
-                container.appendChild(box);
+                activeBox.appendChild(box);
             });
+        }
+
+        async function respondToDuel(challengeId, accept) {
+            const res = await fetch('/api/duels/respond', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ challenge_id: challengeId, accept: accept })
+            });
+            const data = await res.json();
+            if (data.status === 'ok') {
+                showAlert(accept ? 'Challenge Accepted! Battle started!' : 'Challenge declined.', 'info');
+                loadDuels();
+            }
         }
 
         async function loadReport() {
             if (!currentUser) return;
             const res = await fetch(`/api/report?user_id=${currentUser.user_id}`);
             const data = await res.json();
-            document.getElementById('report-view-container').innerText = data.report_content || 'No report generated.';
-        }
+            
+            const container = document.getElementById('report-view-container');
+            const grade = data.grade || 'A';
+            const avgScore = data.avg_score || 85;
+            const streaks = data.streaks || {};
 
-        async function seedDemoData() {
-            const res = await fetch('/api/seed-demo', { method: 'POST' });
-            const data = await res.json();
-            showAlert('Generated 15 IIITR users with 25 days of realistic behavioral history!', 'success');
-            await loadAllStudents();
-            loadHabits();
-            loadSynergy();
-            loadLeaderboard();
-            loadDuels();
-            loadReport();
+            let tableRows = '';
+            for (const [hid, m] of Object.entries(streaks)) {
+                tableRows += `
+                    <tr>
+                        <td><strong>${m.name}</strong></td>
+                        <td>${m.category}</td>
+                        <td>🔥 ${m.current_streak} days</td>
+                        <td>${m.rate_7d}%</td>
+                        <td>${m.rate_30d}%</td>
+                        <td><strong>${m.health_score}/100</strong></td>
+                    </tr>
+                `;
+            }
+
+            container.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 24px; background: #131b2e; border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 24px;">
+                    <div style="font-size: 3rem; font-weight: 900; color: #10b981;">${grade}</div>
+                    <div>
+                        <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 4px;">Overall Consistency Rating</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Average Habit Health Score: <strong>${avgScore}/100</strong> across all active routines.</p>
+                    </div>
+                </div>
+
+                <div style="background: #131b2e; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                    <h4 style="color: #fff; margin-bottom: 12px;">Habit Breakdown & Resilience Table</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Habit</th>
+                                <th>Category</th>
+                                <th>Current Streak</th>
+                                <th>7-Day Rate</th>
+                                <th>30-Day Rate</th>
+                                <th>Health Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows || '<tr><td colspan="6">No habit records.</td></tr>'}</tbody>
+                    </table>
+                </div>
+
+                <div style="background: #131b2e; border: 1px solid var(--border); border-radius: 12px; padding: 20px;">
+                    <h4 style="color: #fff; margin-bottom: 10px;">💡 Recommended Behavioral Focus</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6;">
+                        1. <strong>Defend Your Keystone:</strong> Focus on maintaining your top catalyst habit rather than trying to hit every goal on busy days.<br>
+                        2. <strong>Stack Connected Habits:</strong> Anchor secondary routines directly after routines with high same-day combo scores.<br>
+                        3. <strong>Grace Freeze Protection:</strong> Use your weekly freeze allowance to maintain streaks without burnout.
+                    </p>
+                </div>
+            `;
         }
 
         function openHabitModal() { document.getElementById('habit-modal').classList.add('active'); }
@@ -1051,7 +1152,7 @@
             });
             closeDuelModal();
             loadDuels();
-            showAlert('Challenge proposal sent!', 'success');
+            showAlert('Challenge proposal dispatched!', 'success');
         }
     </script>
 </body>

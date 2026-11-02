@@ -28,11 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 INDEX_HTML = os.path.join(TEMPLATES_DIR, "index.html")
 
 db = DataManager()
-auth_service = AuthService(
-    db,
-    smtp_sender="cs25b1008@iiitr.ac.in",
-    smtp_password="zucs ficm ngjs defz"
-)
+auth_service = AuthService(db)
 social_engine = SocialEngine(db)
 
 # Auto-seed 15 students if database is currently blank
@@ -52,7 +48,7 @@ async def serve_index():
 
 @app.get("/api/users")
 async def api_get_all_users():
-    """Retrieve roster of registered students for quick demo switching."""
+    """Retrieve roster of registered students for friend lookups and duels."""
     if len(db.get_all_users()) == 0:
         DemoDataSeeder(db).seed_complete_demo_environment()
 
@@ -71,7 +67,7 @@ async def api_get_all_users():
     return {"users": users_list}
 
 
-# ==================== Authentication API ====================
+# ==================== Robust Authentication API ====================
 
 @app.post("/api/auth/register")
 async def api_register(request: Request):
@@ -139,7 +135,7 @@ async def api_send_otp(request: Request):
 
     try:
         auth_service.generate_and_send_otp(email)
-        return {"status": "ok", "message": "Verification code dispatched."}
+        return {"status": "ok", "message": "Verification code dispatched to your Gmail inbox."}
     except HabitTrackerException as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -232,6 +228,15 @@ async def api_create_habit(request: Request):
     return {"status": "ok", "habit": habit.to_dict()}
 
 
+@app.delete("/api/habits/{habit_id}")
+async def api_delete_habit(habit_id: str):
+    """Delete a habit from persistent storage."""
+    deleted = db.delete_habit(habit_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Habit not found.")
+    return {"status": "ok", "message": "Habit deleted successfully."}
+
+
 @app.post("/api/habits/log")
 async def api_log_habit(request: Request):
     body = await request.json()
@@ -284,13 +289,20 @@ async def api_get_leaderboard(user_id: str, scope: str = "global", timeframe: st
 
 @app.get("/api/duels")
 async def api_get_duels(user_id: str):
+    """Retrieve all user duels, checking live progress and pending invitations."""
     duels = social_engine.get_user_duels(user_id)
-    synced = [social_engine.sync_duel_progress(d["challenge_id"]).to_dict() for d in duels]
+    synced = []
+    for d in duels:
+        synced_duel = social_engine.sync_duel_progress(d["challenge_id"]).to_dict()
+        synced_duel["is_challenger"] = d.get("challenger_id") == user_id
+        synced_duel["is_opponent"] = d.get("opponent_id") == user_id
+        synced.append(synced_duel)
     return {"duels": synced}
 
 
 @app.post("/api/duels")
 async def api_create_duel(request: Request):
+    """Propose a new 1-on-1 habit challenge to a friend."""
     body = await request.json()
     duel = social_engine.create_duel(
         challenger_id=body.get("challenger_id"),
@@ -301,13 +313,38 @@ async def api_create_duel(request: Request):
     return {"status": "ok", "duel": duel.to_dict()}
 
 
+@app.post("/api/duels/respond")
+async def api_respond_duel(request: Request):
+    """Accept or decline an incoming challenge invitation."""
+    body = await request.json()
+    challenge_id = body.get("challenge_id")
+    accept = bool(body.get("accept", True))
+    success = social_engine.respond_to_duel(challenge_id, accept)
+    if not success:
+        raise HTTPException(status_code=404, detail="Challenge duel not found.")
+    return {"status": "ok", "accepted": accept}
+
+
 # ==================== Diagnostic Report API ====================
 
 @app.get("/api/report")
 async def api_get_report(user_id: str):
     reporter = DiagnosticReportGenerator(db, user_id)
     md = reporter.generate_markdown_report()
-    return {"report_content": md}
+    analyzer = HabitSynergyAnalyzer(db, user_id)
+    streaks = analyzer.compute_habit_streaks_and_health()
+    keystones = analyzer.detect_keystone_habits()
+    
+    avg_score = int(sum(m["health_score"] for m in streaks.values()) / max(1, len(streaks))) if streaks else 50
+    grade = "A+" if avg_score >= 85 else "A" if avg_score >= 75 else "B" if avg_score >= 60 else "C"
+
+    return {
+        "report_content": md,
+        "grade": grade,
+        "avg_score": avg_score,
+        "streaks": streaks,
+        "keystones": keystones
+    }
 
 
 @app.get("/api/report/download")
@@ -319,12 +356,3 @@ async def api_download_report(user_id: str = "usr_aryan"):
         media_type="text/markdown",
         headers={"Content-Disposition": f"attachment; filename=habit_diagnostic_report_{user_id}.md"}
     )
-
-
-# ==================== Seed Demo API ====================
-
-@app.post("/api/seed-demo")
-async def api_seed_demo():
-    seeder = DemoDataSeeder(db)
-    result = seeder.seed_complete_demo_environment()
-    return {"status": "ok", "details": result}
